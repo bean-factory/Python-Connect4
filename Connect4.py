@@ -3,8 +3,9 @@ Player = True
 CRED = '\033[91m'
 CEND = '\033[0m'
 CYELLOW = '\33[33m'
-R = CRED+"•"+CEND
-Y = CYELLOW+"•"+CEND
+R = CRED+"⬤"+CEND
+Y = CYELLOW+"⬤"+CEND
+
 while True:
 
     def init():
@@ -25,7 +26,7 @@ while True:
         for i in range(Width):
             L2 = []
             for j in range(Length):
-                L2.append("•")
+                L2.append("⬤")
             L.append(L2)
     
     def draw():
@@ -66,7 +67,7 @@ while True:
             N = int(input("Enter column: "))
             if N <= Length:
                 for i in range(len(L)-1,-1,-1):
-                    if L[i][N-1] == "•":
+                    if L[i][N-1] == "⬤":
                         L[i][N-1] = C
                         Player = not Player
                         check()
