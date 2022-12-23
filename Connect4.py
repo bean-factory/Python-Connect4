@@ -1,8 +1,7 @@
-InProgress = True
-Players = ["Red Player's turn", "Yellow Player's turn"]
+Players = ["Yellow Player's turn","Red Player's turn"]
 Player = True
 
-while InProgress == True:
+while True:
 
     def init():
         global X,Y,L
@@ -32,7 +31,27 @@ while InProgress == True:
             print()
     
     def check():
-        pass
+        global L
+        for i in L:
+            for j in range(0,len(i)-3):
+                if i[j] == "R" and i[j+1] == "R" and i[j+2] == "R" and i[j+3] == "R":
+                    draw()
+                    print("Red has won! ")
+                    quit()
+                elif i[j] == "Y" and i[j+1] == "Y" and i[j+2] == "Y" and i[j+3] == "Y":
+                    draw()
+                    print("Yellow has won! ")
+                    quit()
+        for i in range(len(L)-3):
+            for j in range(0,len(L[i])):
+                if L[i][j] == "R" and L[i+1][j] == "R" and L[i+2][j] == "R" and L[i+3][j] == "R":
+                    draw()
+                    print("Red has won! ")
+                    quit()
+                elif L[i][j] == "Y" and L[i+1][j] == "Y" and L[i+2][j] == "Y" and L[i+3][j] == "Y":
+                    draw()
+                    print("Yellow has won! ")
+                    quit()
 
     def move():
         global Player, Players
