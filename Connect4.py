@@ -1,5 +1,8 @@
 Players = ["Yellow Player's turn","Red Player's turn"]
 Player = True
+CRED = '\033[91m'
+CEND = '\033[0m'
+CYELLOW = '\33[33m'
 
 while True:
 
@@ -34,21 +37,21 @@ while True:
         global L
         for i in L:
             for j in range(0,len(i)-3):
-                if i[j] == "R" and i[j+1] == "R" and i[j+2] == "R" and i[j+3] == "R":
+                if i[j] == CRED+"•"+CEND and i[j+1] == CRED+"•"+CEND and i[j+2] == CRED+"•"+CEND and i[j+3] == CRED+"•"+CEND:
                     draw()
                     print("Red has won! ")
                     quit()
-                elif i[j] == "Y" and i[j+1] == "Y" and i[j+2] == "Y" and i[j+3] == "Y":
+                elif i[j] == CYELLOW+"•"+CEND and i[j+1] == CYELLOW+"•"+CEND and i[j+2] == CYELLOW+"•"+CEND and i[j+3] == CYELLOW+"•"+CEND:
                     draw()
                     print("Yellow has won! ")
                     quit()
         for i in range(len(L)-3):
             for j in range(0,len(L[i])):
-                if L[i][j] == "R" and L[i+1][j] == "R" and L[i+2][j] == "R" and L[i+3][j] == "R":
+                if L[i][j] == CRED+"•"+CEND and L[i+1][j] == CRED+"•"+CEND and L[i+2][j] == CRED+"•"+CEND and L[i+3][j] == CRED+"•"+CEND:
                     draw()
                     print("Red has won! ")
                     quit()
-                elif L[i][j] == "Y" and L[i+1][j] == "Y" and L[i+2][j] == "Y" and L[i+3][j] == "Y":
+                elif L[i][j] == CYELLOW+"•"+CEND and L[i+1][j] == CYELLOW+"•"+CEND and L[i+2][j] == CYELLOW+"•"+CEND and L[i+3][j] == CYELLOW+"•"+CEND:
                     draw()
                     print("Yellow has won! ")
                     quit()
@@ -57,7 +60,7 @@ while True:
         global Player, Players
         while True:
             print("-"*25,Players[int(Player)],"-"*25)
-            C = "R" if Player == True else "Y"
+            C = CRED+"•"+CEND if Player == True else CYELLOW+"•"+CEND
             draw()
             N = int(input("Enter column: "))
             if N <= X:
