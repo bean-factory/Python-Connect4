@@ -37,15 +37,19 @@ while True:
     
     def check():
         global L
+        if sum(i.count("⬤") for i in L) == 0:
+            draw()
+            print("Draw!")
+            quit()
         for i in L:
             for j in range(0,len(i)-3):
                 if i[j] == R and i[j+1] == R and i[j+2] == R and i[j+3] == R:
                     draw()
-                    print("Red has won! ")
+                    print("Red has won!")
                     quit()
                 elif i[j] == Y and i[j+1] == Y and i[j+2] == Y and i[j+3] == Y:
                     draw()
-                    print("Yellow has won! ")
+                    print("Yellow has won!")
                     quit()
         for i in range(len(L)-3):
             for j in range(0,len(L[i])):
