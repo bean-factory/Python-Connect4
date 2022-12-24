@@ -1,35 +1,53 @@
 Players = ["Yellow Player's turn","Red Player's turn"]
+#True for Red, False for Yellow
 Player = True
-CRED = '\033[91m'
-CEND = '\033[0m'
-CYELLOW = '\33[33m'
-R = CRED+"⬤"+CEND
-Y = CYELLOW+"⬤"+CEND
+#ANSI codes for colored output
+Red = '\033[91m'
+End = '\033[0m'
+Yellow = '\33[33m'
+R = Red+"⬤"+End
+Y = Yellow+"⬤"+End
 
 while True:
 
     def init():
-        global Length,Width,L
+        #Setup board
+        global Height,Height,L
+        
         while True:
-            Length = int(input("Enter width: "))
-            if Length >= 4:
+            Height = input("Enter width: ")
+            try:
+                Height = int(Height)
+            except ValueError:
+                print("Must be between 4 and 20")
+                continue 
+            if 4 <= Height <= 20:
                 break
             else:
-                print("Must be atleast 4")
+                print("Must be between 4 and 20")
+        
         while True:
-            Width = int(input("Enter height: "))
-            if Width >= 4:
+            Height = int(input("Enter height: "))
+            try:
+                Height = int(Height)
+            except ValueError:
+                print("Must be between 4 and 20")
+                continue 
+            if 4 <= Height <= 20:
                 break
             else:
-                print("Must be atleast 4")
+                print("Must be between 4 and 20")
+        
         L = []
-        for i in range(Width):
+        
+        for i in range(Height):
             L2 = []
-            for j in range(Length):
+            for j in range(Height):
                 L2.append("⬤")
             L.append(L2)
     
     def draw():
+        #Print board
         for i in L:
             for j in i:
                 print(j,end="  ")
@@ -37,10 +55,8 @@ while True:
     
     def check():
         global L
-        if sum(i.count("⬤") for i in L) == 0:
-            draw()
-            print("Draw!")
-            quit()
+        
+        #Horizontal Check
         for i in L:
             for j in range(0,len(i)-3):
                 if i[j] == R and i[j+1] == R and i[j+2] == R and i[j+3] == R:
@@ -51,6 +67,8 @@ while True:
                     draw()
                     print("Yellow has won!")
                     quit()
+
+        #Vertical Check
         for i in range(len(L)-3):
             for j in range(0,len(L[i])):
                 if L[i][j] == R and L[i+1][j] == R and L[i+2][j] == R and L[i+3][j] == R:
@@ -61,26 +79,49 @@ while True:
                     draw()
                     print("Yellow has won! ")
                     quit()
+        
+        #Draw Check
+        if sum(i.count("⬤") for i in L) == 0:
+            draw()
+            print("Draw!")
+            quit()
 
     def move():
+        #Get Player move
         global Player, Players
+
         while True:
+            
             print("-"*25,Players[int(Player)],"-"*25)
             C = R if Player == True else Y
             draw()
-            N = int(input("Enter column: "))
-            if N <= Length:
-                for i in range(len(L)-1,-1,-1):
-                    if L[i][N-1] == "⬤":
-                        L[i][N-1] = C
-                        Player = not Player
-                        check()
-                        break
+            
+            while True:
+                
+                N = input('Enter column: ')
+                
+                try:
+                    N = int(N)
+                except ValueError:
+                    print("Illegal move, please try again.")
+                    print("-"*25,Players[int(Player)],"-"*25)
+                    draw()
+                    continue
+                if 1 <= N <= len(L[0]):
+                    break
                 else:
                     print("Illegal move, please try again.")
+                    print("-"*25,Players[int(Player)],"-"*25)
+                    draw()
+            
+            for i in range(len(L)-1,-1,-1):
+                if L[i][N-1] == "⬤":
+                    L[i][N-1] = C
+                    Player = not Player
+                    check()
+                    break
             else:
                 print("Illegal move, please try again.")
-                draw()
 
     init()
     move()
