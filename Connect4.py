@@ -6,7 +6,7 @@ Player = True
 #ANSI codes for colored output
 Red = '\033[91m'
 End = '\033[0m'
-Yellow = '\33[33m'
+Yellow = '\33[93m'
 R = Red+"⬤"+End
 Y = Yellow+"⬤"+End
 
