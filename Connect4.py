@@ -1,6 +1,8 @@
 Players = ["Yellow Player's turn","Red Player's turn"]
+
 #True for Red, False for Yellow
 Player = True
+
 #ANSI codes for colored output
 Red = '\033[91m'
 End = '\033[0m'
@@ -50,7 +52,7 @@ while True:
         #Print board
         for i in L:
             for j in i:
-                print(j,end="  ")
+                print(j,end=" ")
             print()
     
     def check():
@@ -123,5 +125,6 @@ while True:
             else:
                 print("Illegal move, please try again.")
 
+    #Start game
     init()
     move()
