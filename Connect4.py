@@ -127,6 +127,9 @@ while True:
     while True:
         N = input("New game? (Y/N): ").upper()
         if N == "Y":
+            L = []
+            InProgress = True
+            Player = True
             break
-        elif N == "N":
+        if N == "N":
             quit()
