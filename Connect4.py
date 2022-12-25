@@ -131,3 +131,4 @@ while EndGame == False:
         if N == "N":
             EndGame = True
             break
+        print("Invalid choice, try again.")
