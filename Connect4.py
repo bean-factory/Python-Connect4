@@ -1,17 +1,16 @@
 Players = ["Yellow","Red"]
 L = []
+
 InProgress = True
+EndGame = False
+
 #True for Red, False for Yellow
 Player = True
 
-#ANSI codes for colored output
-Red = "\033[91m"
-End = "\033[0m"
-Yellow = "\33[93m"
-R = Red+"⬤"+End
-Y = Yellow+"⬤"+End
+R = "🔴"
+Y = "🟡"
 
-while True:
+while EndGame == False:
     def init():
         #Setup board
         print("Rules:","1. Tokens will pile up from the bottom as you place them from the top.", "2. Only 1 move is allowed per turn, and only 2 players can play. Red Player moves first, followed by the Yellow Player", "3. First to connect 4 tokens horizontally or vertically wins.", "4. When it is your turn, specify the column number from the left. A white dot indicates a vacant space.","5. The current board will appear after each move.", sep = "\n") 
@@ -42,14 +41,14 @@ while True:
         for i in range(Height):
             L2 = []
             for j in range(Width):
-                L2.append("⬤")
+                L2.append("⚪")
             L.append(L2)
     
     def draw():
         #Print board
         for i in L:
             for j in i:
-                print(j,end=" ")
+                print(j,end="")
             print()
     
     def check():
@@ -72,7 +71,7 @@ while True:
                     win()
         
         #Draw Check
-        if sum(i.count("⬤") for i in L) == 0:
+        if sum(i.count("⚪") for i in L) == 0:
             draw()
             print("Draw!")
             InProgress = False
@@ -112,7 +111,7 @@ while True:
                 draw()
         
         for i in range(len(L)-1,-1,-1):
-            if L[i][N-1] == "⬤":
+            if L[i][N-1] == "⚪":
                 L[i][N-1] = C
                 check()
                 Player = not Player
@@ -132,4 +131,5 @@ while True:
             Player = True
             break
         if N == "N":
-            quit()
+            EndGame = True
+            break
