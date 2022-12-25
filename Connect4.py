@@ -72,15 +72,15 @@ while EndGame == False:
         
         #Draw Check
         if sum(i.count("⚪") for i in L) == 0:
+            print("-"*25,"Draw!","-"*25)
             draw()
-            print("Draw!")
             InProgress = False
     
     def win():
         #Display Outcome
         global InProgress
+        print("-"*25,Players[int(Player)],"Player has won!","-"*25)
         draw()
-        print(Players[int(Player)], "has won!")
         InProgress = False
     
     def move():
@@ -98,16 +98,16 @@ while EndGame == False:
             try:
                 N = int(N)
             except ValueError:
-                print("Illegal move, please try again.")
                 print("-"*25,Players[int(Player)],"Player's Turn","-"*25)
+                print("Illegal move, please try again.")
                 draw()
                 continue
     
-            if 1 <= N <= len(L[0]):
+            if 1 <= N <= len(L[0]) and L[0][N-1] == "⚪":
                 break
             else:
-                print("Illegal move, please try again.")
                 print("-"*25,Players[int(Player)],"Player's Turn","-"*25)
+                print("Illegal move, please try again.")
                 draw()
         
         for i in range(len(L)-1,-1,-1):
@@ -116,8 +116,6 @@ while EndGame == False:
                 check()
                 Player = not Player
                 break
-        else:
-            print("Illegal move, please try again.")
     
     #Start game
     init()
