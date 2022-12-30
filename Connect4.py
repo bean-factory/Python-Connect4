@@ -14,6 +14,7 @@ E = "⚪"
 def init():
     #Setup board
     print("Rules:","1. Tokens will pile up from the bottom as you place them from the top.", "2. Only 1 move is allowed per turn, and only 2 players can play. Red Player moves first, followed by the Yellow Player", "3. First to connect 4 tokens horizontally or vertically wins.", "4. When it is your turn, specify the column number from the left. A white dot indicates a vacant space.","5. The current board will appear after each move.", sep = "\n") 
+   
     while True:
         Width = input("Enter width: ")
         try:
@@ -50,37 +51,45 @@ def board():
         print()
 
 def check():
-    global L,InProgress
-    
     #Horizontal Check
     for i in L:
         for j in range(0,len(i)-3):
-            if i[j] == R and i[j+1] == R and i[j+2] == R and i[j+3] == R:
-                win("Red")
-            elif i[j] == Y and i[j+1] == Y and i[j+2] == Y and i[j+3] == Y:
-                win("Yellow")
-
+            if i[j:j+4] == [R, R, R, R] or i[j:j+4] == [Y, Y, Y, Y]:
+                win("1")
+                return True
+    
     #Vertical Check
     for i in range(len(L)-3):
         for j in range(0,len(L[i])):
-            if L[i][j] == R and L[i+1][j] == R and L[i+2][j] == R and L[i+3][j] == R:
-                win("Red")
-            elif L[i][j] == Y and L[i+1][j] == Y and L[i+2][j] == Y and L[i+3][j] == Y:
-                win("Yellow")
+            if L[i][j] == L[i+1][j] == L[i+2][j] == L[i+3][j] and L[i][j] != E:
+                win("2")
+                return True
     
+    #Diagonal Check (top left to bottom right)
+    for i in range(len(L)-3):
+        for j in range(0,len(L[i])-3):
+            if L[i][j] == L[i+1][j+1] == L[i+2][j+2] == L[i+3][j+3] and L[i][j] != E:
+                win("3")
+                return True
+    
+    #Diagonal Check (top right to bottom left)
+    for i in range(len(L)-3):
+        for j in range(0,len(L[i])-3):
+            if L[i][::-1][j] == L[i+1][::-1][j+1] == L[i+2][::-1][j+2] == L[i+3][::-1][j+3] and L[i][::-1][j] != E:
+                win("4")
+                return True
     #Draw Check
     if sum(i.count(E) for i in L) == 0:
         win("Draw")
+        return True
 
-def win(outcome):
+def win(outcome="Not Draw"):
     #Display Outcome
-    global InProgress
     if outcome == "Draw":
         print("-"*25,outcome,"-"*25)
     else:
-        print("-"*25,outcome,"Player has won!","-"*25)
+        print("-"*25,Players[int(not Player)],"Player has won!","-"*25,outcome)
     board()
-    InProgress = False
 
 def move():
     #Get Player move
@@ -91,9 +100,7 @@ def move():
     board()
     
     while True:
-        
-        N = input("Enter column: ")
-        
+        N = input("Enter column: ")    
         try:
             N = int(N)
             if N < 1 or N > len(L[0]) or L[0][N-1] != E:
@@ -108,20 +115,20 @@ def move():
     for i in range(len(L)-1,-1,-1):
         if L[i][N-1] == E:
             L[i][N-1] = C
-            check()
             Player = not Player
             break
 
 while EndGame == False: 
     #Start game
     init()
-    while InProgress == True:
+    
+    while not check():
         move()
+
     while True:
         N = input("New game? (Y/N): ").upper()
         if N == "Y":
             L = []
-            InProgress = True
             Player = True
             break
         if N == "N":
