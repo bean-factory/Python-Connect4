@@ -13,7 +13,7 @@ E = "⚪"
 
 def init():
     #Setup board
-    print("Rules:","1. Tokens will pile up from the bottom as you place them from the top.", "2. Only 1 move is allowed per turn, and only 2 players can play. Red Player moves first, followed by the Yellow Player", "3. First to connect 4 tokens horizontally or vertically wins.", "4. When it is your turn, specify the column number from the left. A white dot indicates a vacant space.","5. The current board will appear after each move.", sep = "\n") 
+    print("Rules:","1. Tokens will pile up from the bottom as you place them from the top.", "2. Only 1 move is allowed per turn, and only 2 players can play. Red Player moves first, followed by the Yellow Player", "3. First to connect 4 tokens horizontally, vertically or diagonally wins.", "4. When it is your turn, specify the column number from the left. A white dot indicates a vacant space.","5. The current board will appear after each move.", sep = "\n") 
    
     while True:
         Width = input("Enter width: ")
