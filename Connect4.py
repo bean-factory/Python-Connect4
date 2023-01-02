@@ -55,28 +55,28 @@ def check():
     for i in L:
         for j in range(0,len(i)-3):
             if i[j:j+4] == [R, R, R, R] or i[j:j+4] == [Y, Y, Y, Y]:
-                win("1")
+                win()
                 return True
     
     #Vertical Check
     for i in range(len(L)-3):
         for j in range(0,len(L[i])):
             if L[i][j] == L[i+1][j] == L[i+2][j] == L[i+3][j] and L[i][j] != E:
-                win("2")
+                win()
                 return True
     
     #Diagonal Check (top left to bottom right)
     for i in range(len(L)-3):
         for j in range(0,len(L[i])-3):
             if L[i][j] == L[i+1][j+1] == L[i+2][j+2] == L[i+3][j+3] and L[i][j] != E:
-                win("3")
+                win()
                 return True
     
     #Diagonal Check (top right to bottom left)
     for i in range(len(L)-3):
         for j in range(0,len(L[i])-3):
             if L[i][::-1][j] == L[i+1][::-1][j+1] == L[i+2][::-1][j+2] == L[i+3][::-1][j+3] and L[i][::-1][j] != E:
-                win("4")
+                win()
                 return True
     #Draw Check
     if sum(i.count(E) for i in L) == 0:
@@ -88,7 +88,7 @@ def win(outcome="Not Draw"):
     if outcome == "Draw":
         print("-"*25,outcome,"-"*25)
     else:
-        print("-"*25,Players[int(not Player)],"Player has won!","-"*25,outcome)
+        print("-"*25,Players[int(not Player)],"Player has won!","-"*25)
     board()
 
 def move():
