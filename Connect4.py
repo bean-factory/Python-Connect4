@@ -52,9 +52,9 @@ def board():
 
 def check():
     #Horizontal Check
-    for i in L:
-        for j in range(0,len(i)-3):
-            if i[j:j+4] == [R, R, R, R] or i[j:j+4] == [Y, Y, Y, Y]:
+    for i in range(len(L)):
+        for j in range(0,len(L[i])-3):
+            if L[i][j] == L[i][j+1] == L[i][j+2] == L[i][j+3] and L[i][j] != E:
                 win()
                 return True
     
@@ -93,8 +93,7 @@ def win(outcome="Not Draw"):
 
 def move():
     #Get Player move
-    global Player, Players
-        
+    global Player        
     print("-"*25,Players[int(Player)],"Player's Turn","-"*25)
     C = R if Player == True else Y
     board()
@@ -121,7 +120,7 @@ def move():
 while EndGame == False: 
     #Start game
     init()
-    
+
     while not check():
         move()
 
