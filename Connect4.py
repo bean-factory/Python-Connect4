@@ -1,4 +1,4 @@
-import os
+import os, sys
 Players = ["Yellow","Red"]
 L = []
 
@@ -16,7 +16,12 @@ def clear():
     if os.name == "nt":
         os.system("cls")
     else:
-        os.system("clear")
+        InColab = 'google.colab' in sys.modules
+        if InColab is True:
+            from google.colab import output
+            output.clear()
+        else:
+            os.system("clear")
     print("Rules:","1. Only 1 move is allowed per turn, and only 2 players can play. Red Player moves first, followed by the Yellow Player", "2. First player to connect 4 tokens horizontally, vertically or diagonally wins.", "3. When it is your turn, specify the column number to drop the token in from the left.", "4. A white dot indicates an empty space.","5. The current board will appear after each turn.", sep = "\n") 
 def init():
     #Setup board
